@@ -21,12 +21,22 @@
             <label for="itemDescription">описания товара:</label>
             <textarea name="itemDescription" placeholder="введите описания товара" id="itemDescription"></textarea>
 
+            <label for="itemCount">количества товара:</label>
+            <input type="number" name="itemCount" placeholder="введите количество товара" value="1" id="itemCount">
 
             <label for="itemCategory">выберете категорию товара:</label>
             <select name="itemCategory" id="itemCategory">
-                        <?php foreach (categoryPrint() as $name) { ?>
-                            <option value=""><?php echo $name; ?></option>
-                        <?php } ?>
+                <?php foreach (categoryPrint() as $names) { ?>
+                    <option value="<?php foreach ($names as $key => $name) {
+                        if ($key == "id") {
+                            echo trim($name);
+                        }
+                    } ?>"><?php foreach ($names as $key => $name) {
+                            if ($key == "name") {
+                                echo trim($name);
+                            }
+                        } ?></option>
+                <?php } ?>
             </select>
             <input type="submit" value="добавить">
         </form>
@@ -37,7 +47,6 @@
         <form action="/category/addCategory" class="category-form" name="categoryForm" method="post">
             <label for="categoryName"></label>
             <input type="text" name="categoryName" placeholder="введите название категории" id="categoryName">
-            <input type="hidden" value="1" name="status">
 
             <input type="submit" value="добавить">
         </form>
@@ -46,9 +55,14 @@
 
 <label for="categoryLinks" class="form-label">доступные категории:</label>
 <ol id="categoryLinks">
-        <?php foreach (categoryPrint() as $name) { ?>
-    <li><a href="#"><?php echo "$name<br>"; ?></a></li>
+        <?php foreach (categoryPrint() as $names) { ?>
+            <?php foreach ($names as $key => $name) { ?>
+
+            <?php if ($key == 'name') { ?>
+                    <li><a href="#"><?php echo "$name<br>"; ?></a></li>
+                    <?php } ?>
         <?php } ?>
+    <?php } ?>
 </ol>
 
 <script src="js/main.js"></script>

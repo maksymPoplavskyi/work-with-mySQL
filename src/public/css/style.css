@@ -21,6 +21,12 @@ body {
     flex-direction: column;
 }
 
+.item-form-block .category-form-block{
+    border: 2px solid black;
+    padding: 20px 40px 0px 40px;
+    border-radius: 5%;
+}
+
 .form-label {
     font-weight: 700;
     font-size: 30px;
@@ -32,7 +38,7 @@ label {
 
 .item-form input[type="submit"] {
     padding: 10px;
-    margin: 20px 0 30px 0;
+    margin: 20px 0 50px 0;
 }
 
 textarea {
