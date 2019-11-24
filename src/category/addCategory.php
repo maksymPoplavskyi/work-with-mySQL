@@ -9,7 +9,7 @@ if (!$conn) {
 $sqlCategory = "INSERT INTO categories (name) VALUE ('$_POST[categoryName]')";
 
 if (mysqli_query($conn, $sqlCategory)) {
-    header('Location: /');
+    header('Location: /index');
 } else {
     echo "Error: " . $sqlCategory . "<br>" . mysqli_error($conn);
 }

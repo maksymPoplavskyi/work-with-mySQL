@@ -6,17 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin: 0 200px 0 200px;
+        }
+        .add-category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .item-form-block {
+            margin-right: 400px;
+        }
+        .item-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 400px;
+            padding: 40px;
+            border: 3px solid aquamarine;
+            border-radius: 25px;
+        }
+        .category-form {
+            display: flex;
+            padding: 40px;
+            border: 3px solid aquamarine;
+            border-radius: 25px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+
+        }
+    </style>
+
 </head>
 <body>
+
+<form action="/admin" method="post" class="form-inline" id="admin" style="border: 2px solid black; border-top: none; border-radius: 20px; display:flex; justify-content: center; flex-direction: column; width: 400px; transform: translate(200%)">
+    <h4>admin panel</h4>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="inputPassword2" class="sr-only">Password</label>
+        <input type="password" name="adminPassword" class="form-control" id="inputPassword2" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+</form>
 
 <div class="add-category-item">
 
     <div class="item-form-block">
-        <label for="itemForm" class="form-label">добавить товар:</label>
+        <h3>добавить товар:</h3>
         <form action="/item/addItem" class="item-form" name="itemForm" method="post">
             <label for="itemName">названия товара:</label>
             <input type="text" name="itemName" placeholder="введите название товара" id="itemName">
-
 
             <label for="itemDescription">описания товара:</label>
             <textarea name="itemDescription" placeholder="введите описания товара" id="itemDescription"></textarea>
@@ -27,45 +74,35 @@
             <label for="itemCategory">выберете категорию товара:</label>
             <select name="itemCategory" id="itemCategory">
                 <?php foreach (categoryPrint() as $names) { ?>
-                    <option value="<?php foreach ($names as $key => $name) {
-                        if ($key == "id") {
-                            echo trim($name);
-                        }
-                    } ?>"><?php foreach ($names as $key => $name) {
-                            if ($key == "name") {
-                                echo trim($name);
-                            }
-                        } ?></option>
+                    <option value="<?php echo $names['id'] ?>"><?php echo $names['name'] ?></option>
                 <?php } ?>
             </select>
-            <input type="submit" value="добавить">
+            <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="добавить" style="margin-top: 30px">
         </form>
     </div>
 
-    <div class="category-form-block">
-        <label for="categoryForm" class="form-label">добавить категорию:</label>
-        <form action="/category/addCategory" class="category-form" name="categoryForm" method="post">
-            <label for="categoryName"></label>
-            <input type="text" name="categoryName" placeholder="введите название категории" id="categoryName">
-
-            <input type="submit" value="добавить">
+    <div class="input-group mb-3">
+        <h3>добавить категорию:</h3>
+        <form action="/category/addCategory" class="category-form" name="categoryForm" method="post" id="categoryForm">
+            <input type="text" name="categoryName" class="form-control" placeholder="добавить категорию" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="добавить" style="margin-left: 10px;">
+            </div>
         </form>
     </div>
+
 </div>
 
-<label for="categoryLinks" class="form-label">доступные категории:</label>
+<h3>доступные категории:</h3>
 <ol id="categoryLinks">
         <?php foreach (categoryPrint() as $names) { ?>
-            <?php foreach ($names as $key => $name) { ?>
-
-            <?php if ($key == 'name') { ?>
-                    <li><a href="#"><?php echo "$name<br>"; ?></a></li>
-                    <?php } ?>
-        <?php } ?>
-    <?php } ?>
+            <li><a href="#"><?php echo $names['name']; ?></a></li>
+            <?php } ?>
 </ol>
 
 <script src="js/main.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

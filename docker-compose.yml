@@ -40,6 +40,8 @@ services:
     domainname: mysql
     hostname: mysql
     image: mysql:5.6
+    ports:
+      - ${MYSQL_PORT}:3306
 #    command: --disable-partition-engine-check
     volumes:
       - "./data/mysql:/var/lib/mysql"

@@ -3,17 +3,6 @@
 require_once '../category/controllerCategory.php';
 //require_once '../item/controllerItem.php';
 
-//print_r(categoryPrint());
-function setNameOption($arrayName)
-{
-    foreach (categoryPrint() as $names) {
-        foreach ($names as $key => $name) {
-            if ($key == "$arrayName") {
-                echo $name;
-            }
-        }
-    }
-}
 
 $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
@@ -23,7 +12,6 @@ switch ($uri) {
     case '/category/addCategory':
     {
         require_once '../category/addCategory.php';
-//        require_once '../public/category.phtml';
         break;
     }
     case '/item/addItem':
@@ -31,9 +19,38 @@ switch ($uri) {
         require_once '../item/addItem.php';
         break;
     }
-    default:
+    case '/registration':
+    {
+        require_once '../public/registration.phtml';
+        require_once '../registration/registration.php';
+        break;
+    }
+    case '/index':
     {
         require_once '../public/index.phtml';
+
+        break;
+    }
+    case '/sign-up':
+    {
+        require_once '../public/signUp.phtml';
+        require_once '../registration/registration.php';
+        break;
+    }
+    case '/verification':
+    {
+        require_once '../signUp/signUp.php';
+        break;
+    }
+    case '/admin':
+    {
+        require_once '../public/admin.phtml';
+        require_once '../admin.php';
+        break;
+    }
+    default:
+    {
+        require_once '../public/signUp.phtml';
         break;
     }
 }
